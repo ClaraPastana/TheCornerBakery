@@ -1,7 +1,4 @@
-﻿label main_menu:
-    return
-
-define u = Character("You", color="#93e436")
+﻿define u = Character("You", color="#93e436")
 
 # The game starts here.
 
