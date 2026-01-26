@@ -1,6 +1,4 @@
-﻿label main_menu:
-    return
-
+﻿# Define characters
 define u = Character("You", color="#93e436")
 define un = Character("Unknown", color="#e49336")
 define c = Character("Cleiton", color="#4363e4")
