@@ -62,8 +62,6 @@ label start:
         n "He seems nervous and keep tapping his foot."
 
 
-
-
     return
 
 
