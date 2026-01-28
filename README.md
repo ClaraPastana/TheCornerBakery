@@ -1,7 +1,3 @@
-Here’s a clean, cozy-but-intriguing **README.md** you can use directly. It keeps the twist subtle and focuses on mood, narrative, and player experience.
-
----
-
 # 🥐 The Corner Bakery
 
 **The Corner Bakery** is a cozy, story-driven café game where warmth, routine, and gentle conversations shape your days. You run a small neighborhood bakery, serve familiar faces, and listen to their stories — one cup of coffee at a time.
