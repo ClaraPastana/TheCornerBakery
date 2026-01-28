@@ -2,6 +2,7 @@
 define u = Character("You", color="#93e436")
 define un = Character("Unknown", color="#e49336")
 define c = Character("Cleiton", color="#4363e4")
+define j = Character("João", color="#e44393")
 define n = Character(" ", color="#e4e243", what_prefix="{i}", what_suffix="{/i}")
 
 # The game starts here.
@@ -119,23 +120,40 @@ label start:
         n "His large glasses make his eyes look even bigger, giving him an innocent and curious appearance."
         n "He aproches the counter eagerly."
         un "H-hello! I would like a Cueca Virada, please."
+        u "What's your name?"
+        j "It's João."
 
         menu Second_Customer_Choice:
             "How to respond?"
 
             #Edit this after testing
             "Be friendly":
-                u "Of course! A Cueca Virada is a great choice. Would you like anything to drink with that?"
-                un "U-um... Yes, please! Could I have a hot chocolate?"
+                u "Awesome! A Cueca Virada is a great choice. Would you like anything to drink with that?"
+                j "U-um... Yes, please! Could I have a juice box?"
                 u "Sure thing! Anything else?"
-                un "N-no, that's all. Thank you!"
-                u "You're welcome! That will be $5.50."
-                un "Here you go!"
+                j "N-no, that's all. Thank you!"
+                u "You're welcome! That will be R$29,00."
+                j "Hmm ... Here is R$30,00."
+                j "Could you give me the change in candy, please?"
+                $ gentleness += 1
+                menu Kid_Candy_Choice:
+                    "Give him candy as change":
+                        u "Alright, I'll give you some candy as change this time."
+                        n "You hand the kid some candy from the display."
+                        j "Yay! Thank you so much!"
+                        n "The kid happily takes the candy and leaves the bakery."
+                        $ gentleness += 1
+                    
+                    "No candy change":
+                        u "As I said, we don't do that here. Here's your change in cash."
+                        n "The kid looks disappointed but accepts the cash."
+                        n "He takes his order and leaves the bakery quietly."
+                j "Here you go!"
                 u "Thanks! Your order will be ready in just a moment."
                 n "You prepare the order while the kid waits patiently."
                 n "Once it's ready, you hand it over to him with a smile."
-                u "Here you go! Enjoy your Cueca Virada and hot chocolate!"
-                un "Th-thank you so much!"
+                u "Here you go! Enjoy your Cueca Virada and juice box!"
+                j "Th-thank you so much!"
                 n "The kid takes his order happily and leaves the bakery, waving goodbye."
 
                 u "That was a nice interaction. It's always great to see kids enjoying their treats."
@@ -144,17 +162,22 @@ label start:
                 u "Here's your Cueca Virada."
                 u "That will be R$25,00."
                 n "The boy hands you a 30 reais bill."
-                un "Could you give me the change in candy, please?"
+                j "Could you give me the change in candy, please?"
                 u "Sorry, we don't do that here."
-                un "But I see some candies over there..."
+                j "But I see some candies over there..."
                 
                 menu Kid_Candy_Choice:
                     "Give him candy as change":
                         u "Alright, I'll give you some candy as change this time."
+                        n "You hand the kid some candy from the display."
+                        j "Yay! Thank you so much!"
+                        n "The kid happily takes the candy and leaves the bakery."
                         $ gentleness += 1
                     
                     "No candy change":
                         u "As I said, we don't do that here. Here's your change in cash."
+                        n "The kid looks disappointed but accepts the cash."
+                        n "He takes his order and leaves the bakery quietly."
 
         
 
