@@ -147,9 +147,9 @@ label start:
                 j "U-um... Yes, please! Could I ha-have a juice box?"
                 pov "Sure thing! Anything else?"
                 j "N-no, that's all. Thank you!"
-                pov "You're welcome! That will be R$29,00."
+                pov "You're welcome! That will be R$15,00."
                 j "Hmm ..." 
-                n "He rummages through his backpack and pulls out a 30 reais bill."
+                n "He rummages through his backpack and pulls out a 20 reais bill."
                 j "Could you gi-give me the change in candy, please?"
                 pov "I'm so sorry João, but I can't do that."
                 j "Bu-bu-but I see some candies over t-there..."
@@ -164,7 +164,7 @@ label start:
                         j "Yay! Thank you so much!"
                         n "The kid happily takes the candy."
                         $ gentleness += 1
-                        $ dedicated -= 1
+                        $ dedication -= 1
                         jump Kid_Order_Preparation
                     
                     "No candy change":
@@ -184,8 +184,8 @@ label start:
 
             "Be indifferent":
                 pov "Here's your Cueca Virada."
-                pov "That will be R$25,00."
-                n "The boy hands you a 30 reais bill."
+                pov "That will be R$15,00."
+                n "The boy hands you a 20 reais bill."
                 j "Could you give me the change in candy, please?"
                 pov "Sorry, we don't do that here."
                 j "But I see some candies over there..."
@@ -211,6 +211,7 @@ label start:
     #After second customer interaction
 
     #Plant atribute
+    #adicionar Jiboia
     default watered_plants = False
 
     label after_second_customer:
