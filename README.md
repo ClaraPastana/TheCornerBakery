@@ -88,15 +88,3 @@ To feel safe.
 
 And sometimes, to realize that comfort can hide more than it reveals.
 
----
-
-If you want, I can also:
-
-* Make a **shorter README**
-* Adapt it to a **more mysterious tone**
-* Write a **GitHub-friendly minimal version**
-* Add **screenshots / badges sections**
-* Rewrite it to fit **Ren’Py / indie narrative games**
-
-Just tell me the vibe ☕✨
-
