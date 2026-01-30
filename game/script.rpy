@@ -1,4 +1,12 @@
-﻿# Define characters (General)
+﻿#finalBossGame Variables
+default player_x = 320
+default player_y = 240
+default player_hp = 20
+default boss_hp = 50
+
+default battle_active = True
+
+# Define characters (General)
 define pov = Character("You", color="#93e436")
 define un = Character("Unknown", color="#e49336")
 define n = Character(" ", color="#e4e243", what_prefix="{i}", what_suffix="{/i}")
@@ -35,9 +43,10 @@ label start:
     #Greeting the first customer desicion
 
     default gentleness = 0
+    
     menu _1c_First_Choice:
-        "What should i do?"
-        "Greet the customer":
+        "What do you say?"
+        "\"Good Morning!\"":
             pov "Good morning! Welcome to my bakery! How can I help you today?"
             un "Hi!"
             un "Could I get two double shots, please? To go."
@@ -52,7 +61,19 @@ label start:
             pov "Alright, Cleiton, your order will be ready in just a moment."
             jump _1c_First_Choice_1a
 
-        "Be indiferent":
+        "\"It's hot today, isn't it?\"":
+            pov "It's hot today, isn't it?"
+            un "Hmm, yeah...kind of."
+            n "The client seem a little unconfortable."
+            n "After some awkward seconds, he takes a look at the menu"
+            un "Hum... Could I get two double shots? To go."
+            pov "Sure. What's your name?"
+            c "It's Cleiton."
+            pov "Okay."
+            jump _1c_First_Choice_1b
+
+
+        "\"...\"":
             pov "..."
             n "He looks at the menu"
             un "Hum... Could I get two double shots? To go."
@@ -129,21 +150,21 @@ label start:
 
         n "Dings the doorbell again"
         pov "Another customer! Time to get back to work."
-        n "A little kid enters the bakery, looking around excitedly. He's using a school uniform and has
+        n "A little kid enters the bakery, looking around wary. He's using a school uniform and has
         a small backpack."
-        n "His large glasses make his eyes look even bigger, giving him an innocent and curious appearance."
-        n "He aproches the counter eagerly."
-        un "H-hello! I would like a C-Cueca Virada, please."
+        n "His large glasses make his eyes look even bigger, giving him an innocent appearance."
+        n "He aproches the counter apprehensive."
+        un "H-hello! I could I get a C-Cueca Virada, please."
         pov "What's your name?"
-        j "It is- is João."
+        j "My name? It is- is João."
 
         #Second customer interaction first desicion
 
         menu _2c_Choice:
             "How to respond?"
 
-            "Be friendly":
-                pov "Awesome! A Cueca Virada is a great choice. Would you like anything to drink with that?"
+            "\"Such a nice name!\"":
+                pov "Such a nice name! A Cueca Virada is a great choice. Would you like anything to drink with that?"
                 j "U-um... Yes, please! Could I ha-have a juice box?"
                 pov "Sure thing! Anything else?"
                 j "N-no, that's all. Thank you!"
@@ -157,7 +178,7 @@ label start:
 
                 #Second customer interaction second desicion
 
-                menu Kid_Candy_Choice_a:
+                menu kidCandyChoice:
                     "Give him candy as change":
                         pov "Alright, I'll give you some candy as change this time."
                         n "You hand the kid some candy from the display."
@@ -165,53 +186,54 @@ label start:
                         n "The kid happily takes the candy."
                         $ gentleness += 1
                         $ dedication -= 1
-                        jump Kid_Order_Preparation
-                    
+                        
+                        if gentleness == 2
+                            jump kidOrderPreparation_A
+                        else 
+                            jump kidOrderPreparation_B
+                
                     "No candy change":
                         pov "As I said, we don't do that here. Here's your change in cash."
                         n "The kid looks disappointed but accepts the cash."
-                        jump Kid_Order_Preparation
                         $ dedicated += 1
+                        jump kidOrderPreparation_B
 
-                label Kid_Order_Preparation:
-                n "You prepare the order while João waits patiently."
-                n "Once it's ready, you hand it over to him with a smile."
-                pov "Here you go! Enjoy your Cueca Virada and juice box!"
-                j "Th-thank you so much!"
-                n "The kid takes his order happily and leaves the bakery, waving goodbye."
+                label kidOrderPreparation_A:
+                    n "You prepare the order while João waits patiently."
+                    n "Once it's ready, you hand it over to him with a smile."
+                    pov "Here you go! Enjoy your Cueca Virada and juice box!"
+                    j "Th-thank you so much!"
+                    n "The kid takes his order happily and leaves the bakery, waving goodbye."
 
-                pov "That was a nice interaction. It's always great to see kids enjoying their treats."
+                    pov "That was a nice interaction. It's always great to see kids enjoying their treats."
 
-            "Be indifferent":
+                label kidOrderPreparation_B:
+                    n "You prepare the order while João waits patiently."
+                    n "Once it's ready, you hand it over to him."
+                    j "..."
+                    n "The kid takes his order and leave more nervous than when he arrived.."
+
+            "Take a Cueca Virada from the display":
+                n "You take a Cueca Virada from the display"
                 pov "Here's your Cueca Virada."
-                pov "That will be R$15,00."
-                n "The boy hands you a 20 reais bill."
+                pov "That will be R$7,00."
+                n "The boy hands you a 10 reais bill."
                 j "Could you give me the change in candy, please?"
                 pov "Sorry, we don't do that here."
                 j "But I see some candies over there..."
+                jump kidCandyChoice                 
 
-                #Second customer interaction second desicion
-                
-                menu Kid_Candy_Choice_b:
-                    "Give him candy as change":
-                        pov "Alright, I'll give you some candy as change this time."
-                        n "You hand the kid some candy from the display."
-                        j "Yay! Thank you so much!"
-                        n "The kid happily takes the candy and leaves the bakery."
-                        $ gentleness += 1
-                        pov "I pity him. Kids can be so cruel to each other at school."
-                    
-                    "No candy change":
-                        pov "As I said, we don't do that here. Here's your change in cash."
-                        n "The kid looks disappointed but accepts the cash."
-                        n "He takes his order and leaves the bakery quietly."
+    
+    #Comentarios pós cliente
+    
+    pov "I pity him. Kids can be so cruel to each other at school."
 
-                        pov "I'm sure he suffers bullying at school with this stutter."
+    pov "I'm sure he suffers bullying at school with this stutter."
 
     #After second customer interaction
 
     #Plant atribute
-    #adicionar Jiboia
+    #Adicionar Jiboia?
     default wateredPlants = False
     default catInteraction = False
 
@@ -284,7 +306,7 @@ label start:
 
         menu _3c_Choice:
             "How to respond?"
-            "\"Trying to get to know my customers better"\":
+            "Trying to get to know my customers better":
                 pov "Just trying to get to know my customers better! It's nice to meet you, Lúcia."
                 l "Nice to meet you too!"
                 pov "Actually... this is top secreat information..."
@@ -308,7 +330,7 @@ label start:
                         "..."
                 jump _3c_Order_Preparation
 
-            "\"Just for my records"\":
+            "Just for my records":
                 pov "Just for my records."
                 l "Oh, okay."
 
@@ -376,7 +398,7 @@ label _3c_endC:
     n "You sigh, hoping the next customer will be more engaging."
     jump after_3c
 
-label after_3c
+label after_3c:
     #If hadn't have cat interaction and have gentleness >=3
     if catInteraction == False and gentleness >=3:
         menu:
@@ -432,7 +454,7 @@ label after_3c
                     
             "Take a break":
                 pov "I think it's time for a short break."
-                        n "You step away from the counter to take a breather."
+                n "You step away from the counter to take a breather."
             
 
     #If had cat and water plants interaction or didn't reach the gentleness/dedication threshold
