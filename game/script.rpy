@@ -35,7 +35,7 @@ label start:
     #Greeting the first customer desicion
 
     default gentleness = 0
-    menu First_Customer_First_Choice:
+    menu _1c_First_Choice:
         "What should i do?"
         "Greet the customer":
             pov "Good morning! Welcome to my bakery! How can I help you today?"
@@ -50,7 +50,7 @@ label start:
             pov "Such a nice name!"
             c "Thanks!"
             pov "Alright, Cleiton, your order will be ready in just a moment."
-            jump First_Customer_First_Choice_1a
+            jump _1c_First_Choice_1a
 
         "Be indiferent":
             pov "..."
@@ -59,19 +59,19 @@ label start:
             pov "Sure. What's your name?"
             c "It's Cleiton."
             pov "Okay."
-            jump First_Customer_First_Choice_1b
+            jump _1c_First_Choice_1b
 
 
-    label First_Customer_First_Choice_1a:
+    label _1c_First_Choice_1a:
         $ gentleness += 1
-        jump First_Customer_Common_End
+        jump _1c_Common_End
 
-    label First_Customer_First_Choice_1b:
-        jump First_Customer_Common_End
+    label _1c_First_Choice_1b:
+        jump _1c_Common_End
 
     #Common ending for first customer interaction
 
-    label First_Customer_Common_End:
+    label _1c_Common_End:
         n "While you prepare the order, Cleiton looks around the bakery."
         n "He seems nervous and keep tapping his foot."
 
@@ -102,30 +102,30 @@ label start:
     #After first customer interaction
     
     default dedication = 0
-    label after_first_customer:
+    label after_1c:
         menu:
             "What do you want to do now?"
             "Clean the counter":
                 pov "Better clean the counter before the next customer arrives."
                 n "You quickly clean the counter, making sure everything is spotless for the next customer."
                 $ dedication += 1
-                jump Second_Customer_entry
+                jump _2c_entry
 
             "Wait for the next customer":
                 pov "Might as well wait for the next customer to arrive."
                 n "You stand behind the counter, waiting for the next customer to enter the bakery."
-                jump Second_Customer_entry
+                jump _2c_entry
 
             "Take one of the candies in display":
                 pov "I could use a little treat while I wait."
                 n "You sneakily take one of the candies from the display and enjoy it."
                 n "Feeling a bit more energized, you prepare for the next customer."
                 $ dedication -= 1
-                jump Second_Customer_entry
+                jump _2c_entry
 
     #Entry second customer
 
-    label Second_Customer_entry:
+    label _2c_entry:
 
         n "Dings the doorbell again"
         pov "Another customer! Time to get back to work."
@@ -139,7 +139,7 @@ label start:
 
         #Second customer interaction first desicion
 
-        menu Second_Customer_Choice:
+        menu _2c_Choice:
             "How to respond?"
 
             "Be friendly":
@@ -212,9 +212,10 @@ label start:
 
     #Plant atribute
     #adicionar Jiboia
-    default watered_plants = False
+    default wateredPlants = False
+    default catInteraction = False
 
-    label after_second_customer:
+    label after_2c:
         if gentleness >= 2:
             menu:
                 "What do you want to do now?"
@@ -232,6 +233,8 @@ label start:
                     n "Muffin follows you back to the counter and sits nearby, purring contentedly."
                     pov "Stay there while I finish my shift, okay?"
                     $ gentleness += 1
+                    $ catInteraction = True
+
                 
                 "Prepare for the next customer":
                     pov "Better get things ready for the next customer."
@@ -253,7 +256,7 @@ label start:
                 "Prepare for the next customer":
                     pov "Better get things ready for the next customer."
                     n "You tidy up the counter and prepare for the next customer."
-                    $ dedication -= 1
+                    $ dedication += 1
 
                 "Wait for the next customer":
                     pov "Might as well wait for the next customer to arrive."
@@ -265,7 +268,7 @@ label start:
                     n "Feeling a bit more connected to the space, you return to the counter."
                     $ dedication += 1
 
-    #Entry third customer
+    #Entry 3c
 
     label thrid_customer_entry:
 
@@ -279,9 +282,9 @@ label start:
         pov "What's your name?"
         l "I'm Lúcia. Why do you ask?"
 
-        menu Third_Customer_Choice:
+        menu _3c_Choice:
             "How to respond?"
-            "Be friendly":
+            "\"Trying to get to know my customers better"\":
                 pov "Just trying to get to know my customers better! It's nice to meet you, Lúcia."
                 l "Nice to meet you too!"
                 pov "Actually... this is top secreat information..."
@@ -293,19 +296,19 @@ label start:
                 pov "I'll get your order ready right away"
                 $ gentleness += 1
                 
-                menu Third_Customer_Choice_a:
+                menu _3c_Choice_a:
                     "Compliment her tote bag":
                         pov "By the way, I love your tote bag! The floral pattern is so pretty."
                         l "Thank you! I got it from a local artisan market. I'm glad you like it."
                         pov "It's always nice to support local artists."
                         $ gentleness += 1
-                        jump Third_Customer_Order_Preparation
+                        jump _3c_Order_Preparation
 
                     "Say nothing more":
                         "..."
-                jump Third_Customer_Order_Preparation
+                jump _3c_Order_Preparation
 
-            "Be indiferent":
+            "\"Just for my records"\":
                 pov "Just for my records."
                 l "Oh, okay."
 
@@ -314,11 +317,12 @@ label start:
                         pov "That's a nice tote bag you have there."
                         l "Thanks, I got it from a local artisan market."
                         pov "Hmm."
-                        jump Third_Customer_Order_Preparation
+                        jump _3c_endB
 
                     "Say nothing more":
                         "..."
-                jump Third_Customer_Order_Preparation 
+                jump _3c_endC
+    
 
         if gentleness > 7:
             l "You seem like a really kind person. It's nice to see someone so dedicated to their work."
@@ -328,7 +332,7 @@ label start:
             pov "Yes, I do! It's been a dream of mine to run my own bakery since I was little."
             pov "I remember baking with my mother and helping her sell treats in the street early in the day."
             pov "Her only goal back then was to provide for our family, but she inspired me to pursue my passion for baking."
-            l "Well, you're doing an amazing job. I'll definitely be coming back here often."
+            l "Well, you're doing an amazing job. This place is amazing!"
             pov "That means a lot to me. Thank you for your support!"
 
         if gentleness > 5 and watered_plants==True:
@@ -338,17 +342,111 @@ label start:
             l "You know what? I think I'll come here more often. This place has a great vibe. I'll even bring my friends! You guys really deserve more customers."
             pov "That's wonderful to hear! I appreciate your support."
 
+        jump _3c_endA
 
-        label Third_Customer_Order_Preparation:
-            n "You prepare Lúcia's order while she waits patiently."
-            n "Once it's ready, you hand it over to her with a smile."
-            pov "Here you go! Enjoy your coffee and tapioca!"
-            l "Thank you so much!"
-            n "Lúcia takes her order happily and leaves the bakery, waving goodbye."
+#Good gentleness path
+label _3c_endA:
+    n "You prepare Lúcia's order while she waits patiently."
+    n "Once it's ready, you hand it over to her with a smile."
+    pov "Here you go! Enjoy your coffee and tapioca!"
+    l "Thank you so much!"
+    n "Lúcia takes her order happily and leaves the bakery, waving goodbye."
 
-            pov "That was a pleasant interaction. I hope she enjoys her order."
+    pov "That was a pleasant interaction. I hope she enjoys her order."
+    jump after_3c
 
-    return
+#A bit bad gentleness path
+label _3c_endB:
+    n "You prepare Lúcia's order while she waits patiently."
+    n "Once it's ready, you hant it over to her"
+    pov "Here you go."
+    n "Lúcia takes her order and leave giving the space a new tone of solitude."
+    n "You feel a bit disheartened by the lack of connection with your customers today."
+    n "After all, the only reason you started doing this was to meet new people and spread gentleness."
+    n "You sigh, hoping the next customer will be more engaging."
+    jump after_3c
 
+#Worst gentleness path
+label _3c_endC:
+    n "You prepare Lúcia's order while she waits patiently."
+    n "Once it's ready, you hant it over to her"
+    n "Lúcia takes her order and leave giving the space a new tone of solitude."
+    n "You feel a disheartened by the lack of connection with your customers today."
+    n "After all, one of the reasons you started doing this was to meet new people and spread gentleness."
+    n "You sigh, hoping the next customer will be more engaging."
+    jump after_3c
 
+label after_3c
+    #If hadn't have cat interaction and have gentleness >=3
+    if catInteraction == False and gentleness >=3:
+        menu:
+            "What do you want to do now?"
+            "Prepare for the next customer":
+                pov "Better get things ready for the next customer."
+                n "You tidy up the counter and prepare for the next customer."
+                pov "Oh! What is this?"
+                n "You find a small note left on the counter by Lúcia."
+                n "It reads: 'Thank you for your kindness and dedication. Your bakery is a true gem in this city. Keep up the great work!' and her phone number below."
+                pov "Haha, this Lúcia is truly something. That's so nice of her! I should give her a call sometime."
+                $ dedication += 1
+
+            "Take a break":
+                pov "I think it's time for a short break."
+                n "You step away from the counter to take a breather."
+                n "A small cat aproaches you, rubbing against your leg."
+                n "It have a calico pattern with patches of orange, black, and white fur. It also have a collar on it's neck with the name 'Muffin' engraved on a small tag."
+                pov "Well, hello there, little one! Are you lost? Do you want some food?"
+                n "The cat meows softly, looking up at you with big, pleading eyes."
+                n "You give Muffin some scraps from the bakery, and it happily devours the food."
+                pov "It probably belongs to someone nearby. I should put up a notice."
+                n "You take a photo of Muffin and edit a quick online notice."
+                n "After posting the notice in social media, you return to the counter feeling refreshed."
+                n "Muffin follows you back to the counter and sits nearby, purring contentedly."
+                pov "Stay there while I finish my shift, okay?"
+                $ gentleness += 1
+                $ catInteraction = True
+
+            "Do some stretches":
+                        pov "My back is a bit sore. I should do some stretches."
+                        n "You take a moment to stretch your arms and legs, relieving some tension."
+
+    #If hadn't have water plants interaction and have dedication >=3
+    if else wateredPlants == False and dedication >=3:
+        menu:
+            "What do you want to do now?"
+            "Prepare for the next customer":
+                        pov "Better get things ready for the next customer."
+                        n "You tidy up the counter and prepare for the next customer."
+                        pov "Oh! What is this?"
+                        n "You find a small note left on the counter by Lúcia."
+                        n "It reads: 'Thank you for your kindness and dedication. Your bakery is a true gem in this city. Keep up the great work!' and her phone number below."
+                        pov "Haha, this Lúcia is truly something. That's so nice of her! I should give her a call sometime."
+                        $ dedication += 1
+
+            "Water plants":
+                    pov "The plants could use some water."
+                    n "You take a moment to water the plants around the bakery, giving them some much-needed hydration."
+                    n "Feeling a bit more connected to the space, you return to the counter."
+                    $ dedication += 1
+                    $ watered_plants = True
+                    
+            "Take a break":
+                pov "I think it's time for a short break."
+                        n "You step away from the counter to take a breather."
+            
+
+    #If had cat and water plants interaction or didn't reach the gentleness/dedication threshold
+    else:
+        menu:
+            "What do you want to do now?"
+            "Prepare for the next customer":
+                        pov "Better get things ready for the next customer."
+                        n "You tidy up the counter and prepare for the next customer."
+            "Take a break":
+                        pov "I think it's time for a short break."
+                        n "You step away from the counter to take a breather."
+            "Do some stretches":
+                        pov "My back is a bit sore. I should do some stretches."
+                        n "You take a moment to stretch your arms and legs, relieving some tension."
+return
 #Free cookie
