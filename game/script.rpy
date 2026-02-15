@@ -1,4 +1,10 @@
-﻿# Define characters (General)
+﻿init python:
+    import random
+
+define personality = " "
+
+
+# Define characters (General)
 define un = Character("Unknown", color="#e49336")
 define n = Character(" ", color="#e4e243", what_prefix="{i}", what_suffix="{/i}")
 define jogador = " "
@@ -13,6 +19,8 @@ define f = Character("Flora", color="#a843e4")
 # The game starts here.
 
 label start:
+
+    $ personality = random.choice(["sweet", "angry"])
 
     label player_name:
         
@@ -43,9 +51,12 @@ label start:
     label first_costumer:
     #Entry first customer
 
-    scene bg blackscreen
-    scene bg bakery
+    camera:
+        subpixel True pos (0, 5) 
+    show bg bakery:
+        subpixel True crop_relative True xzoom 2.13 yzoom 2.31 crop (0.0, -0.07, 1.0, 1.0) 
 
+    b "[personality]"
     b "Yikes!"
     b "I arrived late to open the store today..."
     b "I'll have to get things moving before the customers arrive."
