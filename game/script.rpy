@@ -51,10 +51,7 @@ label start:
     label first_costumer:
     #Entry first customer
 
-    camera:
-        subpixel True pos (0, 5) 
-    show bg bakery:
-        subpixel True crop_relative True xzoom 2.13 yzoom 2.31 crop (0.0, -0.07, 1.0, 1.0) 
+    scene bg bakery with fade
 
     b "[personality]"
     b "Yikes!"
@@ -63,7 +60,7 @@ label start:
 
     play music "audio/bakery_theme.ogg" fadein 1.0
 
-    scene bg view_from_balcony
+    scene bg view_from_counter with fade
 
     play music "audio/doorbell.ogg" fadein 1.0
 
